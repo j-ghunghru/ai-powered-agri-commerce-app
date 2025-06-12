@@ -1,9 +1,29 @@
+# High-Level Component Architecture
+
+system:
+  name: agri_commerce_ai_platform
+  version: 1.0
+
 components:
-  - name: FarmerApp
-    type: Frontend
-    technology: React.js
-  - name: BackendAPI
-    type: Backend
-    technology: FastAPI
-  - name: Database
-    type: SQLite
+  - name: FastAPI Backend
+    type: API Server
+    language: Python
+    ports: [8000]
+
+  - name: SQLite Database
+    type: Storage
+    technology: SQLite3
+
+  - name: AI Engine
+    type: Microservice
+    capabilities:
+      - Matching Engine
+      - Negotiation Agent
+
+  - name: React Frontend
+    type: UI
+    ports: [3000]
+
+  - name: BEKN Orchestrator
+    type: Workflow Engine
+    description: Drives the matchmaking & negotiation logic

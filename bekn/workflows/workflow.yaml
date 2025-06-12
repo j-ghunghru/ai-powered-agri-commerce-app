@@ -1,0 +1,32 @@
+# Negotiation and Matching Workflow (BEKN format)
+
+name: produce_negotiation_flow
+version: 1.0
+
+nodes:
+  - id: start
+    type: entry
+    next: match_engine
+
+  - id: match_engine
+    type: service
+    service: ai_engine.match
+    input: buyer_request
+    output: matched_produce
+    next: negotiation_agent
+
+  - id: negotiation_agent
+    type: agent
+    agent: ai_agent.negotiator
+    input: matched_produce
+    output: final_offer
+    next: deal_closure
+
+  - id: deal_closure
+    type: contract
+    contract_type: digital
+    input: final_offer
+    output: agreement
+
+  - id: end
+    type: exit

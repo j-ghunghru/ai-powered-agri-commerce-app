@@ -1,15 +1,18 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy.orm import Session
-from . import models, schemas, database
-from .database import engine, get_db
-from .ai_engine.match import match_produce
+from routes import user, produce
+from database import Base, engine
 
-models.Base.metadata.create_all(bind=engine)
+Base.metadata.create_all(bind=engine)
 
-app = FastAPI()
+app = FastAPI(title="Agri-Commerce API")
 
-origins = ["http://localhost:3000"]
+origins = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://yourfrontend.app"
+]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -18,18 +21,5 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/health")
-def health_check():
-    return {"status": "ok"}
-
-@app.post("/produce")
-def publish_produce(produce: schemas.Produce, db: Session = Depends(get_db)):
-    db_produce = models.Produce(**produce.dict())
-    db.add(db_produce)
-    db.commit()
-    db.refresh(db_produce)
-    return db_produce
-
-@app.post("/match")
-def get_matches(input_data: schemas.MatchInput, db: Session = Depends(get_db)):
-    return match_produce(input_data, db)
+app.include_router(user.router)
+app.include_router(produce.router)
