@@ -5,4 +5,10 @@ pydantic==2.7.1
 pydantic-settings==2.2.1
 passlib[bcrypt]==1.7.4
 python-jose[cryptography]==3.3.0
+<<<<<<< HEAD
 python-dotenv==1.0.1
+=======
+
+# pip install -r requirements.txt
+
+>>>>>>> a31aea797af5fb8d4ad6ef57688bb0e5c4cdd582

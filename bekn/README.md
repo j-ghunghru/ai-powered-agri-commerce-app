@@ -1,4 +1,4 @@
-# 📦 BEKN Folder
+# BEKN Folder
 
 This directory holds YAML definitions for AI workflows, pipelines, and architecture used in the Agri-Commerce platform.
 
