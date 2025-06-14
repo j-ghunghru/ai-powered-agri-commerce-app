@@ -1,0 +1,55 @@
+
+version: 1.0
+workflow: agri-commerce-bekn
+description: AI-powered buyer-seller negotiation for agricultural produce
+
+business_events:
+  - id: list_produce
+    method: POST
+    endpoint: /produce
+    triggers:
+      - entity: Produce
+        action: create
+      - knowledge: recommendation_engine
+        input: [crop, tags, lat, lon]
+
+  - id: make_offer
+    method: POST
+    endpoint: /negotiation
+    triggers:
+      - knowledge: negotiation_agent
+        input: [offer_price, product_id, buyer_id]
+        output: [accept, counter, reject]
+
+  - id: accept_offer
+    method: POST
+    endpoint: /contract
+    triggers:
+      - entity: Contract
+        action: generate
+        store: cloud_drive
+        format: pdf
+
+entity_knowledge:
+  - User
+  - Produce
+  - Deal
+  - Contract
+
+knowledge_modules:
+  - id: recommendation_engine
+    type: content_based_filter
+    model: "sklearn"
+    output: ranked_produce_list
+
+  - id: negotiation_agent
+    type: rule_based
+    strategy: threshold_margin + history_bias
+    output: negotiation_decision
+
+negotiation_flow:
+  steps:
+    - offer
+    - counter
+    - accept
+    - contract

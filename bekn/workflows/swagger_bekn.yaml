@@ -1,0 +1,31 @@
+
+paths:
+  /produce:
+    post:
+      tags:
+        - Produce
+      summary: List Produce (B - Business Event)
+      description: Triggered when a seller publishes produce
+      responses:
+        '200':
+          description: Produce successfully listed
+
+  /negotiation:
+    post:
+      tags:
+        - Negotiation
+      summary: Make Offer (N - Negotiation)
+      description: Buyer makes offer on a listed product
+      responses:
+        '200':
+          description: Offer processed
+
+  /contract:
+    post:
+      tags:
+        - Contract
+      summary: Accept Deal & Generate Contract
+      description: Finalizes the deal and generates a digital contract
+      responses:
+        '200':
+          description: Contract generated
