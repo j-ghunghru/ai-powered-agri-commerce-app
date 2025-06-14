@@ -7,9 +7,8 @@
 
 Start backend:
 ```bash
-cd api && uvicorn main:app --reload
+python -m venv venv
+pip install -r backend\app\requirements.txt
+cd backend
+uvicorn app.main:app --reload
 ```
-
-Start frontend:
-```bash
-cd frontend && npm install && npm start
