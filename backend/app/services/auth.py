@@ -1,42 +1,41 @@
-from fastapi import HTTPException
-from app.models.user import User
-from app.schemas.user import UserCreate, UserLogin
-from sqlalchemy.orm import Session
-from passlib.context import CryptContext
-from jose import jwt
+# This code provides authentication services, including password hashing, JWT token creation, and verification.
+# backend/app/services/auth.py
+
 from datetime import datetime, timedelta
+from typing import Optional
+from jose import JWTError, jwt
+from passlib.context import CryptContext
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-SECRET_KEY = "supersecretkey"
+# Secret key and algorithm for JWT
+SECRET_KEY = "your-super-secret-key"
 ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 60
 
-def hash_password(password: str) -> str:
-    return pwd_context.hash(password)
+# Password hashing context using bcrypt
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
+# This code provides authentication services, including password hashing, JWT token creation, and verification.
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     return pwd_context.verify(plain_password, hashed_password)
 
-def create_token(username: str) -> str:
-    expire = datetime.utcnow() + timedelta(minutes=30)
-    to_encode = {"sub": username, "exp": expire}
+# This code hashes a password using bcrypt.
+def get_password_hash(password: str) -> str:
+    return pwd_context.hash(password)
+
+# This code creates a JWT access token with an expiration time.
+def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
+    to_encode = data.copy()
+    if expires_delta:
+        expire = datetime.now() + expires_delta
+    else:
+        expire = datetime.now() + timedelta(minutes=15)
+    to_encode.update({"exp": expire})
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
-def register_user(user: UserCreate, db: Session):
-    if db.query(User).filter(User.username == user.username).first():
-        raise HTTPException(status_code=400, detail="Username already exists")
-    db_user = User(
-        username=user.username,
-        hashed_password=hash_password(user.password),
-        role=user.role
-    )
-    db.add(db_user)
-    db.commit()
-    db.refresh(db_user)
-    return {"message": "User registered"}
-
-def authenticate_user(user: UserLogin, db: Session):
-    db_user = db.query(User).filter(User.username == user.username).first()
-    if not db_user or not verify_password(user.password, db_user.hashed_password):
-        raise HTTPException(status_code=401, detail="Invalid credentials")
-    token = create_token(db_user.username)
-    return {"access_token": token, "token_type": "bearer"}
+# This code decodes a JWT access token and returns the payload if valid, or None if invalid.
+def decode_access_token(token: str) -> Optional[dict]:
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        return payload
+    except JWTError:
+        return None

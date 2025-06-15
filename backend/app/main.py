@@ -1,18 +1,18 @@
+# This file is part of the AI-Powered-Agri-Commerce project.
+# backend/app/main.py
+
 from fastapi import FastAPI
-from app.routers.produce import router
-from app.routers.auth import router as auth_router
-from app.db.session import Base, engine
+from app.routers import user, produce
+from app.db.session import init_db
 
-# Create tables
-Base.metadata.create_all(bind=engine)
+app = FastAPI(title="AI-Powered-Agri-Commerce API", version="1.0.0")
 
-app = FastAPI(title="BEKN Agri-Commerce API")
+# Initialize database tables
+init_db()
 
-# Routers
-app.include_router(auth_router, prefix="/auth", tags=["Auth"])
+app.include_router(user.router, prefix="/users", tags=["Users"])
+app.include_router(produce.router, prefix="/produce", tags=["Produce"])
 
-from app.routers.produce import router as produce_router
-app.include_router(produce_router, prefix="/produce", tags=["Produce"])
-
-from app.routers.me import router as me_router
-app.include_router(me_router, tags=["User"])
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}

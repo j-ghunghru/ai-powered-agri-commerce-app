@@ -1,10 +1,25 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr, Field
+from typing import Optional
+from datetime import datetime
 
-class UserCreate(BaseModel):
-    username: str
+class UserBase(BaseModel):
+    name: str
+    email: Optional[EmailStr] = None
+    role: str = Field(..., pattern="^(farmer|buyer)$")
+    location: Optional[str] = None
+    phone_number: str
+
+class UserCreate(UserBase):
     password: str
-    role: str
+
+class UserOut(UserBase):
+    user_id: int
+    created_at: datetime
+
+    model_config = {
+        "from_attributes": True
+    }
 
 class UserLogin(BaseModel):
-    username: str
+    phone_number: str
     password: str
