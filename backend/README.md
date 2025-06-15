@@ -1,4 +1,4 @@
-# Agri-Commerce Backend API (FastAPI + SQLite)
+# AI-Powered-Agri-Commerce Backend API (FastAPI + SQLite)
 
 This backend is built using **FastAPI**, **SQLAlchemy**, and **SQLite** to support an AI-powered agri-commerce platform for farmers and buyers.
 
@@ -57,7 +57,7 @@ Visit: [http://localhost:8000/docs](http://localhost:8000/docs)
 
 ---
 
-## 🧱 Project Structure
+## Project Structure
 ```
 backend/
 └── app/
