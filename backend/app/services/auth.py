@@ -1,6 +1,7 @@
-# This code provides authentication services, including password hashing, JWT token creation, and verification.
-# backend/app/services/auth.py
+# Description: This code provides authentication services, including password hashing, JWT token creation, and verification.
+# File: backend/app/services/auth.py
 
+# Import necessary libraries
 from datetime import datetime, timedelta
 from typing import Optional
 from jose import JWTError, jwt

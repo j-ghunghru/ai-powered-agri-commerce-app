@@ -1,4 +1,4 @@
-# Agri-Commerce Backend API (FastAPI + SQLite)
+# AI-Powered-Agri-Commerce Backend API (FastAPI + SQLite)
 
 This backend is built using **FastAPI**, **SQLAlchemy**, and **SQLite** to support an AI-powered agri-commerce platform for farmers and buyers.
 
@@ -29,6 +29,21 @@ This backend is built using **FastAPI**, **SQLAlchemy**, and **SQLite** to suppo
 
 ---
 
+## Environment Configuration
+
+### `.env` file (at project root):
+```env
+SQLALCHEMY_DATABASE_URL=sqlite:///./agri_app.db
+```
+
+### `app/config.py`
+Loads the `.env` file and sets:
+```python
+SQLALCHEMY_DATABASE_URL = os.getenv("SQLALCHEMY_DATABASE_URL", "sqlite:///./agri_app.db")
+```
+
+---
+
 ## Models
 
 ### User Model (`models/user.py`)
@@ -40,11 +55,22 @@ This backend is built using **FastAPI**, **SQLAlchemy**, and **SQLite** to suppo
 
 ---
 
+## Mock Data for Testing
+
+- Seeded automatically using `app/db/mockdata.py`
+- Triggered from `init_db()` in `app/db/session.py`
+- Inserts:
+  - 10 Farmers
+  - 10 Buyers
+  - 20 Produce Listings
+
+---
+
 ## Getting Started
 
 ### 1. Install dependencies
 ```bash
-pip install fastapi uvicorn sqlalchemy passlib[bcrypt] python-jose
+pip install -r requirements.txt
 ```
 
 ### 2. Run the app
@@ -57,11 +83,13 @@ Visit: [http://localhost:8000/docs](http://localhost:8000/docs)
 
 ---
 
-## 🧱 Project Structure
+## Project Structure
 ```
 backend/
+├── .env
 └── app/
     ├── main.py
+    ├── config.py
     ├── models/
     ├── schemas/
     ├── routers/
@@ -73,13 +101,15 @@ backend/
 ---
 
 ## Auto Database Setup
-- On startup, `init_db()` creates all tables if not present using `Base.metadata.create_all(bind=engine)`.
+- On startup, `init_db()`:
+  - Creates all tables using SQLAlchemy models
+  - Seeds mock data if empty
 
 ---
 
 ## Notes
-- SQLite used for local development (can be upgraded to PostgreSQL or MySQL).
-- Only **farmers** can publish produce.
-- Clean architecture: separate `models`, `schemas`, `routers`, and `services`.
+- SQLite used for local development (can be swapped for PostgreSQL)
+- `.env`-based config with `python-dotenv` support
+- Clean modular architecture: `models`, `schemas`, `routers`, `services`, `db`
 
 ---

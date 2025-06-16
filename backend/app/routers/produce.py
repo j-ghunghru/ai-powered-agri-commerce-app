@@ -1,6 +1,7 @@
-# This code defines the API endpoints for managing agricultural produce listings by farmers.
-# backend/app/routers/produce.py
+# Description: This code defines the API endpoints for managing agricultural produce listings by farmers.
+# File: backend/app/routers/produce.py
 
+# import necessary libraries
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.schemas.produce import ProduceCreate, ProduceOut

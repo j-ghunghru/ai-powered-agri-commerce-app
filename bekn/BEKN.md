@@ -1,11 +1,11 @@
-# BEKN Specification – Agri-Commerce AI Platform
+# BEKN Specification – AI-Powered-Agri-Commerce-App
 
-## 🧩 Overview
+## Overview
 This project uses the **BEKN Protocol (Business Event – Entity Knowledge – Knowledge – Negotiation)** to define modular, AI-enhanced workflows that guide farmers and buyers through matching, negotiation, and digital contracting.
 
 ---
 
-## 🅱️ B – Business Events
+## B – Business Events
 
 | Event Name          | Description                            | Trigger API       |
 |---------------------|----------------------------------------|-------------------|
@@ -17,7 +17,7 @@ This project uses the **BEKN Protocol (Business Event – Entity Knowledge – K
 
 ---
 
-## 🧠 E – Entity/Environment Knowledge
+## E – Entity/Environment Knowledge
 
 | Entity       | Attributes |
 |--------------|------------|
@@ -28,7 +28,7 @@ This project uses the **BEKN Protocol (Business Event – Entity Knowledge – K
 
 ---
 
-## 🧠 K – Knowledge/AI Layer
+## K – Knowledge/AI Layer
 
 | Model                | Input                       | Output                     |
 |----------------------|-----------------------------|----------------------------|
@@ -37,7 +37,7 @@ This project uses the **BEKN Protocol (Business Event – Entity Knowledge – K
 
 ---
 
-## 🔁 N – Negotiation/Decision Layer
+## N – Negotiation/Decision Layer
 
 | Flow Step      | Outcome |
 |----------------|---------|

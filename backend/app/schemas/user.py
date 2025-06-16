@@ -1,3 +1,7 @@
+# Description: This module defines the Pydantic models for user-related operations in the application.
+# File: backend/app/schemas/user.py
+
+# import necessary libraries
 from pydantic import BaseModel, EmailStr, Field
 from typing import Optional
 from datetime import datetime

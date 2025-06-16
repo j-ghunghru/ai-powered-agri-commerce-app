@@ -1,3 +1,7 @@
+# Description: This module defines the Produce model for the application, which represents agricultural produce listed by farmers.
+# File: backend/app/models/produce.py
+
+# import necessary libraries
 from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from app.db.session import Base
 

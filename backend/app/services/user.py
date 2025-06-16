@@ -1,5 +1,5 @@
-# This code defines the service functions for user management, including creating a user, authenticating a user, and retrieving user information.
-## backend/app/services/user.py
+# Description: This code defines the service functions for user management, including creating a user, authenticating a user, and retrieving user information.
+# File: backend/app/services/user.py
 
 from sqlalchemy.orm import Session
 from app.models.user import User

@@ -1,3 +1,7 @@
+# Description: This module defines Pydantic models for agricultural produce listings.
+# File: backend/app/schemas/produce.py
+
+# import necessary libraries
 from pydantic import BaseModel, Field
 from typing import Optional
 

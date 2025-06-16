@@ -1,3 +1,7 @@
+# Description: This module defines the User model for the application, which represents users in the system.
+# File: backend/app/models/user.py
+
+# import necessary libraries
 from sqlalchemy import Column, Integer, Text, CheckConstraint, DateTime, func
 from app.db.session import Base
 

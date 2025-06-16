@@ -1,6 +1,7 @@
-# This code defines the service functions for managing agricultural produce listings, including creating, listing, and retrieving produce by ID.
-# backend/app/services/produce.py
+# Description: This code defines the service functions for managing agricultural produce listings, including creating, listing, and retrieving produce by ID.
+# File: backend/app/services/produce.py
 
+# import necessary libraries
 from sqlalchemy.orm import Session
 from app.models.produce import Produce
 from app.schemas.produce import ProduceCreate

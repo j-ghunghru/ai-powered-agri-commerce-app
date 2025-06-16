@@ -1,6 +1,7 @@
-# This file is part of the AI-Powered-Agri-Commerce project.
-# backend/app/main.py
+# Description: This file is part of the AI-Powered-Agri-Commerce project. It initializes the FastAPI application, sets up the database, and includes routers for user and produce management.
+# File: backend/app/main.py
 
+# import necessary libraries
 from fastapi import FastAPI
 from app.routers import user, produce
 from app.db.session import init_db

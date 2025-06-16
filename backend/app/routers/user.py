@@ -1,6 +1,7 @@
-# This code defines the API endpoints for user management, including registration, login, and profile retrieval.
-# backend/app/routers/user.py
+# Description: This code defines the API endpoints for user management, including registration, login, and profile retrieval.
+# File: backend/app/routers/user.py
 
+# import necessary libraries
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
